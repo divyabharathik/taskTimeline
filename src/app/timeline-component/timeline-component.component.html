@@ -1,0 +1,74 @@
+<section class="header">
+  <div class="group-by">
+    <div class="bold-text">Grouped by</div>
+    <div class="div">Product area</div>
+  </div>
+  <div class="vertical-divider"></div>
+  <div class="date-section">
+
+    <div class="date-header-view">
+      <div class="month-year bold-text">
+        {{monthYear}}
+      </div>
+      <div class="btn-layout">
+        <div class="today">Today</div>
+        <div class="interval">
+          <mat-select placeholder="Select interval" (selectionChange)="intervalChange($event)">
+            <mat-option *ngFor="let choice of intervals" [value]=choice>{{choice}}</mat-option>
+          </mat-select>
+        </div>
+        <mat-icon class="previous">
+          <span class="material-symbols-outlined">
+            chevron_left
+          </span>
+        </mat-icon>
+        <mat-icon class="next">
+          <span class="material-symbols-outlined">
+            chevron_right
+          </span>
+        </mat-icon>
+        <div class="see-records">
+          <mat-icon>
+            <span class="material-symbols-outlined">
+              menu
+            </span>
+          </mat-icon>
+          <div>
+            See records
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="days-view">
+      <div class="day" *ngFor="let item of dates">
+        <div class="weekday">
+          {{ item | date: 'EEE'}}
+        </div>
+        <div class="date">
+          {{ item | date: 'd'}}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="horizontal-divider"></div>
+
+<div class="header" *ngFor="let product of productList">
+  <div class="group-by">
+    <div class="product-name">
+      {{product.productName}}
+    </div>
+  </div>
+  <div class="vertical-divider"></div>
+  <div class="task-section">
+    <div class="task" *ngFor="let task of product.listOfActions">
+      <div class="day">
+        <div [ngStyle]="getStyles(item.block,item.visibility)" *ngFor="let item of calculateBlockList(task);let i=index">
+          {{task.title}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="horizontal-divider"></div>
